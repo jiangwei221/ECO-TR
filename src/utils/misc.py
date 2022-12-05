@@ -23,3 +23,21 @@ def upper_config(dict_cfg):
     if not isinstance(dict_cfg, dict):
         return dict_cfg
     return {k.upper(): upper_config(v) for k, v in dict_cfg.items()}
+
+
+def embed_breakpoint(debug_info='', terminate=True):
+    print('\nyou are inside a break point')
+    if debug_info:
+        print(f'debug info: {debug_info}')
+    print('')
+    embedding = ('import numpy as np\n'
+                 'import IPython\n'
+                 'import matplotlib.pyplot as plt\n'
+                 'IPython.embed()\n'
+                 )
+    if terminate:
+        embedding += (
+            'exit()'
+        )
+
+    return embedding
